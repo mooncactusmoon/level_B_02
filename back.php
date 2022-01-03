@@ -18,12 +18,12 @@
 <?php  include "./front/header.php";?>
         <div id="mm">
         	<div class="hal" id="lef">
-            	                	    <a class="blo" href="?do=po">分類網誌</a>
-               	                     	    <a class="blo" href="?do=news">最新文章</a>
-               	                     	    <a class="blo" href="?do=pop">人氣文章</a>
-               	                     	    <a class="blo" href="?do=know">講座訊息</a>
-               	                     	    <a class="blo" href="?do=que">問卷調查</a>
-               	                 </div>
+				<a class="blo" href="?do=admin">帳號管理</a>
+            	<a class="blo" href="?do=po">分類網誌</a>
+                <a class="blo" href="?do=news">最新文章管理</a>
+                <a class="blo" href="?do=know">講座管理</a>
+                <a class="blo" href="?do=que">問卷管理</a>
+             </div>
             <div class="hal" id="main">
             	<div>
 					<!-- 有預設的padding margin等等 所以marquee的width要<82% -->
@@ -33,7 +33,7 @@
 					if(isset($_SESSION['login'])){
 						if($_SESSION['login']=='admin'){
 						?>
-						歡迎admin,<br><button onclick="location.href='back.php'">管理</button>|<button onclick="logout()">登出</button>
+						歡迎admin,<br><button>管理</button>|<button onclick="logout()">登出</button>
 						<?php
 						}else{
 						?>
@@ -50,11 +50,11 @@
                     	<div class="">
 							<?php
 								$do=$_GET['do']??'home';
-								$file='front/'.$do.".php";
+								$file='back/'.$do.".php";
 								if(file_exists($file)){
 									include $file;
 								}else{
-									include "front/home.php";
+									include "back/home.php";
 								}
 							?>
                 		</div>
