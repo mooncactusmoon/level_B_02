@@ -41,7 +41,8 @@
             pw2: $("#pw2").val(),
             email: $("#email").val(),
         }; //{}為物件寫法，內容用逗號隔開
-        if (form.acc == '' || form.pw == '' || form.pw2 == '' || form.email == '') {
+        // if (form.acc == '' || form.pw == '' || form.pw2 == '' || form.email == '') {
+        if (Object.values(form).indexOf('')>=0) {
             alert("不可空白");
         } else {
             if (form.pw != form.pw2) {
