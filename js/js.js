@@ -1,10 +1,18 @@
 // JavaScript Document
 function lo(th,url)
-{
+{ 
 	$.ajax(url,{cache:false,success: function(x){$(th).html(x)}})
+}// 用不到
+
+function logout(){
+	$.post("api/logout.php",()=>{
+		location.href="index.php";
+		// location.reload();這個是把頁面重整一次
+	});
 }
-function good(id,type,user)
-{
+
+function good(id,type,user) 
+{//重點
 	$.post("back.php?do=good&type="+type,{"id":id,"user":user},function()
 	{
 		if(type=="1")

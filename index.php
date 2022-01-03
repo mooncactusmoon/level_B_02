@@ -29,8 +29,24 @@
 					<!-- 有預設的padding margin等等 所以marquee的width要<82% -->
             		<marquee style="width:80%; display:inline-block;">請民眾踴躍投稿電子報，讓電子報成為大家互相交流、分享的園地!詳見最新文章</marquee>
                 	<span style="width:18%; display:inline-block;">
-                    	                    	<a href="?do=login">會員登入</a>
-                    	                    </span>
+					<?php
+					if(isset($_SESSION['login'])){
+						if($_SESSION['login']=='admin'){
+						?>
+						歡迎admin,<br><button>管理</button>|<button onclick="logout()">登出</button>
+						<?php
+						}else{
+						?>
+						歡迎<?=$_SESSION['login'];?><button onclick="logout()">登出</button>
+						<?php
+						}
+					}else{
+						?>
+						<a href="?do=login">會員登入</a>
+						<?php
+					}
+					?>
+                  	</span>
                     	<div class="">
 							<?php
 								$do=$_GET['do']??'home';
