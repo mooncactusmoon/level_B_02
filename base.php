@@ -7,17 +7,10 @@ class DB{
     protected $pw="";
     protected $pdo;
     public $table;
-    public $title;
-    public $button;
-    public $header; //表單的第一個框框col
-    public $append; //只有admin和menu會用到
-    public $upload;
 
     public function __construct($table){
         $this->table=$table;
         $this->pdo=new PDO($this->dsn,$this->user,$this->pw);
-        
-
     }
 
     
