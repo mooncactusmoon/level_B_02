@@ -19,9 +19,58 @@
             <td><input type="next" name="email" id="email"></td>
         </tr>
         <tr>
-            <td><button>註冊</button><button>清除</button></td>
+            <td>
+                <button onclick="reg()">註冊</button>
+                <button onclick="reset()">清除</button>
+            </td>
             <td></td>
         </tr>
     </table>
 
 </fieldset>
+
+<script>
+    function reset() {
+        $("#acc,#pw,#pw2,#email").val("")
+    }
+
+    function reg() {
+        let form = {
+            acc: $("#acc").val(),
+            pw: $("#pw").val(),
+            pw2: $("#pw2").val(),
+            email: $("#email").val(),
+        }; //{}為物件寫法，內容用逗號隔開
+        if (form.acc == '' || form.pw == '' || form.pw2 == '' || form.email == '') {
+            alert("不可空白");
+        } else {
+            if (form.pw != form.pw2) {
+                alert("密碼錯誤");
+            } else {
+                $.post("api/chk_acc.php", {
+                    acc: form.acc
+                }, (chk) => {
+                    if (parseInt(chk)==1){
+                        alert("帳號重複");
+                    } else {
+                        delete form.pw2; //資料表沒有pw2 所以要先刪除才不會出錯
+                        $.post("api/reg.php",form, (res) => {
+                            alert("註冊完成，歡迎加入");
+                            location.href='index.php?do=login';
+
+                            // if(parseInt(res)==1){
+                            //     alert("註冊完成，歡迎加入");
+                            //     location.href='index.php?do=login';
+                            // }else{
+                            //     alert("註冊失敗");
+                            // }
+
+                        });
+                    }
+                });
+
+            }
+
+        }
+    }
+</script>
