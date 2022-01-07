@@ -25,13 +25,13 @@
                     <div class="full pop" style="display:none;">
                         <h2 style="color:skyblue;">
                             <?php
-                                $tarray=[
-                                    "1"=>"健康新知",
-                                    "2"=>"菸害防治",
-                                    "3"=>"癌症防治",
-                                    "4"=>"慢性病防治",
-                                ];
-                                echo $tarray[$row['type']]; //陣列寫法
+                            $tarray = [
+                                "1" => "健康新知",
+                                "2" => "菸害防治",
+                                "3" => "癌症防治",
+                                "4" => "慢性病防治",
+                            ];
+                            echo $tarray[$row['type']]; //陣列寫法
 
                             // //    switch寫法
                             // switch ($row['type']) {
@@ -53,7 +53,19 @@
                         <?= nl2br($row['text']); ?>
                     </div>
                 </td>
-                <td><?= $row['good']; ?>個人說<img src="icon/02B03.jpg" width="25px" height="25px"></td>
+                <td>
+                    <?= $row['good']; ?>個人說<img src="icon/02B03.jpg" width="25px" height="25px">
+                    <?php
+                    if (isset($_SESSION['login'])) {
+                        $chk = $Log->math('count', '*', ['news' => $row['id'], 'user' => $_SESSION['login']]);
+                        if ($chk > 0) {
+                            echo "<a class='g' data-news='{$row['id']}' data-type='1'>-收回讚</a>";
+                        } else {
+                            echo "<a class='g' data-news='{$row['id']}' data-type='2'>-讚</a>";
+                        }
+                    }
+                    ?>
+                </td>
             </tr>
         <?php
         }
@@ -88,4 +100,26 @@
             // $(this).parent().find(".full").addClass('pop').toggle();
             $(this).parent().find(".pop").toggle();
         })
+    $(".g").on('click', function() {
+        let type = $(this).data('type');
+        let news = $(this).data('news');
+        //{ who? post? type? }
+        $.post("api/good.php", {
+            type,
+            news
+        }, () => {
+            location.reload();
+            // switch (type) {
+            //     case 1:
+            //         $(this).text("讚");
+            //         $(this).data('type', 2);
+            //         break;
+            //     case 2:
+            //         $(this).text("收回讚");
+            //         $(this).data('type', 1);
+
+            //         break;
+            // }
+        })
+    });
 </script>
