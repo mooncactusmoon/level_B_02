@@ -1,10 +1,10 @@
 <fieldset>
-    <legend>目前位置: 首頁 > 最新文章區</legend>
+    <legend>目前位置: 首頁 > 人氣文章區</legend>
     <table>
         <tr>
             <td width="30%">標題</td>
             <td width="50%">內容</td>
-            <td></td>
+            <td>人氣</td>
         </tr>
         <?php
         $total = $News->math("count", "*");
@@ -13,7 +13,7 @@
         $now = $_GET['p'] ?? 1; //預設從第一頁開始
         $start = ($now - 1) * $div; //每一頁從誰開始
 
-        $rows = $News->all(['sh' => 1], " limit $start,$div");
+        $rows = $News->all(['sh' => 1], " order by `good` desc limit $start,$div");
         foreach ($rows as $key => $row) {
         ?>
             <tr>
@@ -24,7 +24,7 @@
                     <div class="short"><?= mb_substr($row['text'], 0, 20); ?>...</div>
                     <div class="full" style="display:none;"><?= nl2br($row['text']); ?></div>
                 </td>
-                <td></td>
+                <td><?=$row['good'];?>個人說<img src="icon/02B03.jpg" width="25px" height="25px"></td>
             </tr>
         <?php
         }
@@ -54,10 +54,9 @@
     </div>
 </fieldset>
 <script>
-    $(".switch").on("click",function(){
-        // $(this).parent().find(".short").toggle();
-        // $(this).parent().find(".full").toggle();
-        $(this).parent().find(".short,.full").toggle();
-    })
+$(".switch").hover(
+    function(){
+    $(this).parent().find(".short,.full").toggle()
+})
 
 </script>
