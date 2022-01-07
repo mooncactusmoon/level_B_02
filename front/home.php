@@ -113,12 +113,25 @@
 如果民眾發現自己解尿不舒服時，一定要在第一時間就診，讓醫師採用檢體對症下藥，只要沒有其他的特殊問題併存，同時能接受完整療程的抗生素治療，通常一星期左右即可痊癒。不過服藥的時間及用量絕對要遵照醫師囑咐，如果自行隨意停藥或不按時服用，很可能會造成殘存的細菌出現抗藥性，非但原本的症狀無法痊癒，還可能帶來慢性泌尿道發炎、尿路結石、腎臟功能受損等併發症，千萬要特別注意。</pre>
 </div>
 <script>
-    $("#p1").show();
+    //沒有ID的做法
+    $(".post").first().show();
+    $(".tag").first().addClass("active");
     $(".tag").on("click", function() {
-        let id = $(this).attr('id').replace("t", "p");
+        let idx=$(this).index();
         $(".tag").removeClass("active");
         $(this).addClass("active");
         $(".post").hide();
-        $("#" + id).show();
+        $(".post").eq(idx).show();
     });
+
+
+    // // 有ID的做法
+    // $("#p1").show();
+    // $(".tag").on("click", function() {
+    //     let id = $(this).attr('id').replace("t", "p");
+    //     $(".tag").removeClass("active");
+    //     $(this).addClass("active");
+    //     $(".post").hide();
+    //     $("#" + id).show();
+    // });
 </script>
