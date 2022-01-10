@@ -7,7 +7,7 @@
             <td></td>
         </tr>
         <?php
-        $total = $News->math("count", "*");
+        $total = $News->math("count", "*",['sh'=>1]);
         $div = 5; //一頁幾個
         $pages = ceil($total / $div); //要有幾頁
         $now = $_GET['p'] ?? 1; //預設從第一頁開始
