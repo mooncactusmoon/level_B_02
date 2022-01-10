@@ -10,4 +10,4 @@ $subject['count']++;
 $Que->save($opt);
 $Que->save($subject);
 
-to("../index.php?do=result");
+to("../index.php?do=result&id=".$subject['id']);
