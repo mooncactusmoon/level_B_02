@@ -49,7 +49,7 @@
             echo $i;
             echo "</a>";
         }
-        if (($now - 1) <= $pages) {
+        if (($now + 1) <= $pages) {
             $next = $now + 1;
             echo "<a href='back.php?do=news&p=$next'>";
             echo ">";
